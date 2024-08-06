@@ -1,0 +1,7 @@
+{
+  "name": "obxvacay",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
