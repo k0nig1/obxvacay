@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import videojs from 'video.js';
+import Player from 'video.js/dist/types/player';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoPlayerService {
-  private player: any | null = null;
+  private player: Player | null = null;
 
   constructor() { }
 
@@ -21,7 +22,7 @@ export class VideoPlayerService {
         preload: 'auto',
         sources: [{
           src: streamUrl,
-          type: 'application/x-mpegURL'
+          type: 'application/x-mpegURL' // m3u8 format
         }]
       });
 
