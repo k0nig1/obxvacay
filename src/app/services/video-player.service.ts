@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import videojs from 'video.js';
+import Player from "video.js/dist/types/player";
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoPlayerService {
-
-  private player: videojs.Player | null = null;
+  private player: Player | null = null;
 
   constructor() { }
 
@@ -15,29 +15,34 @@ export class VideoPlayerService {
       this.player.dispose();
     }
 
-    this.player = videojs(videoElement, {
-      controls: true,
-      autoplay: true,
-      preload: 'auto',
-      sources: [{
-        src: streamUrl,
-        type: 'application/x-mpegURL'
-      }]
-    });
+    // Ensure that the video element is valid before initializing the player
+    if (videoElement) {
+      this.player = videojs(videoElement, {
+        controls: true,
+        autoplay: true,
+        preload: 'auto',
+        sources: [{
+          src: streamUrl,
+          type: 'application/x-mpegURL'
+        }]
+      });
 
-    this.player.on('error', (error) => {
-      console.error('Video.js error:', error);
-    });
+      this.player.on('error', (error: any) => {
+        console.error('Video.js error:', error);
+      });
 
-    this.player.on('ready', () => {
-      console.log('Video.js player is ready');
-    });
+      this.player.on('ready', () => {
+        console.log('Video.js player is ready');
+      });
+    } else {
+      console.error('Invalid video element provided for Video.js initialization');
+    }
   }
 
   disposePlayer(): void {
     if (this.player) {
       this.player.dispose();
-      this.player = null;
+      this.player = null;  // Reset the player to null after disposing
     }
   }
 }
