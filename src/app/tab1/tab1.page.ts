@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { LivestreamComponent } from '../livestream/livestream.component';
@@ -16,6 +16,7 @@ import { LivestreamComponent } from '../livestream/livestream.component';
     ExploreContainerComponent,
     LivestreamComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab1Page {
   constructor() { }

@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import videojs from 'video.js';
-import Player from "video.js/dist/types/player";
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoPlayerService {
-  private player: Player | null = null;
+  private player: any | null = null;
 
   constructor() { }
 
-  initializePlayer(videoElement: HTMLVideoElement, streamUrl: string): void {
+  initializePlayer(videoElement: any, streamUrl: string): void {
     if (this.player) {
       this.player.dispose();
     }
 
-    // Ensure that the video element is valid before initializing the player
     if (videoElement) {
       this.player = videojs(videoElement, {
         controls: true,
@@ -42,7 +40,7 @@ export class VideoPlayerService {
   disposePlayer(): void {
     if (this.player) {
       this.player.dispose();
-      this.player = null;  // Reset the player to null after disposing
+      this.player = null;
     }
   }
 }
